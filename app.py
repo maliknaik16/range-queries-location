@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request
 from spatial import Spatial
 import sqlite3
+import time
 
 app = Flask(__name__)
 
@@ -46,9 +47,16 @@ def home():
 
     center = [float(lat), float(lon)]
 
+    # Get the initial time.
+    initial_time = time.time()
+
+    # Get the nearby locations.
     nearby_data = spatial.get_nearby_locations(conn, center, radius)
 
-    return render_template('index.html', nearby_data=nearby_data, center=center, radius=radius, spatial=spatial)
+    # Calculate the time.
+    diff = time.time() - initial_time
+
+    return render_template('index.html', nearby_data=nearby_data, center=center, radius=radius, spatial=spatial, resp_time=round(diff, 3))
 
 if __name__ == '__main__':
 

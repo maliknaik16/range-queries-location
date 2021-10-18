@@ -134,7 +134,7 @@ class Trie:
         # Returns the given words prefixed with the given x.
         return sorted(self.output, key = lambda x: x[1], reverse=True)
 
-    def render(self, prog='twopi'):
+    def render(self, prog='dot'):
         """
         Renders the Prefix-tree using NetworkX
         """
