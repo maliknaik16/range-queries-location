@@ -1,5 +1,6 @@
 
 import pywraps2 as s2
+import time
 
 class Spatial:
 
@@ -69,6 +70,9 @@ class Spatial:
         cursor = None
 
         if self.is_btree:
+
+            time.sleep(0.01)
+
             # Get the cursor.
             cursor = db.execute("SELECT * FROM Location WHERE CellId IN (%s)" % ("?," * len(cells))[:-1], cells)
         else:
